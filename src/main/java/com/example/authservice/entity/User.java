@@ -1,27 +1,32 @@
 package com.example.authservice.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
 
+
     private Long id;
-    private String UserName;
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
+    @Column(unique=true)
+    private String userName;
 
     private String password;
     private String role;
 
     public String getRole() {
         return role;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setRole(String role) {
