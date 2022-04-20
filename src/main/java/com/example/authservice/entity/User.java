@@ -1,20 +1,22 @@
 package com.example.authservice.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
 public class User {
 
-
+    @Id
+    @GeneratedValue
     private Long id;
     @Column(unique=true)
+    @NotNull
     private String userName;
 
+    @NotNull
     private String password;
+    @NotNull
     private String role;
 
     public String getRole() {
@@ -46,7 +48,6 @@ public class User {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

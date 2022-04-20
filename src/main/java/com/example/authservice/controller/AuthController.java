@@ -1,6 +1,7 @@
 package com.example.authservice.controller;
 
 import com.example.authservice.dto.CredentialsDto;
+import com.example.authservice.dto.UserDto;
 import com.example.authservice.entity.User;
 import com.example.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,17 @@ public class AuthController {
 
     @PostMapping("/signIn")
     public ResponseEntity<Object> signIn(@RequestBody CredentialsDto credentialsDto) {
-        String token=userService.signIn(credentialsDto);
+        UserDto token=userService.signIn(credentialsDto);
         if (token.equals(null)){
             return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
         }
         else
             return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+    @PostMapping("/getUserData")
+    @ResponseBody
+    public ResponseEntity<UserDto> getUserData(@RequestBody String token) {
+        return ResponseEntity.ok(userService.getUserData(token));
+
     }
 }
